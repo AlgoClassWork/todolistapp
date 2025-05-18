@@ -13,7 +13,7 @@ def init_database():
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    title TEXT NOT NULL,
                    description TEXT,
-                   done INTEGER DEFAULT 0 -- 0 for false, 1 for true)
+                   done INTEGER DEFAULT 0)
                    ''')
     connection.commit()
     connection.close()
