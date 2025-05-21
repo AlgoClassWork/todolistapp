@@ -1,22 +1,27 @@
-<h1>ToDo List</h1>
-<h2>Мои задачи:</h2>
+from flask import Flask, render_template, request, redirect
+import database
 
-{% if tasks %}
-    <ul>
-    {% for task in tasks %}
-        <li>{{ task.title }} - {{task.description}}</li>
-        <form action="/delete/{{task.id}}" method="POST">
-            <button>Удалить</button>
-        </form>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Задач пока нет</p>
-{% endif %}
+app = Flask(__name__)
 
-<h2>Добавить задачу:</h2>
-<form action="/add" method="POST">
-    <input name="title" placeholder="Задача . . ."> <br>
-    <input name="description" placeholder="Описание . . ."> <br>
-    <button type="submit">Создать</button>
-</form>
+#http://127.0.0.1:5000/
+@app.route('/')
+def main_page():
+    tasks = database.get_all_tasks() 
+    return render_template('index.html', tasks=tasks)
+
+#http://127.0.0.1:5000/add
+@app.route('/add', methods=['POST'])
+def add_task():
+    title = request.form['title']
+    description = request.form['description']
+    if title:
+        database.add_task(title, description)
+    return redirect('/')
+
+#http://127.0.0.1:5000/delete/1
+@app.route('/delete/<int:task_id>', methods=['POST'])
+def delete_task(task_id):
+    database.delete_task(task_id)
+    return redirect('/')
+
+app.run()
