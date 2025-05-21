@@ -8,6 +8,7 @@
         <form action="/delete/{{task.id}}" method="POST">
             <button>Удалить</button>
         </form>
+        <a href="/edit/{{task.id}}">Изменить</a>
     {% endfor %}
     </ul>
 {% else %}
@@ -18,5 +19,5 @@
 <form action="/add" method="POST">
     <input name="title" placeholder="Задача . . ."> <br>
     <input name="description" placeholder="Описание . . ."> <br>
-    <button type="submit">Создать</button>
+    <button>Создать</button>
 </form>
