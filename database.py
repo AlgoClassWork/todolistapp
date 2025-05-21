@@ -48,3 +48,11 @@ def get_all_tasks():
     tasks = cursor.fetchall()
     connection.close()
     return tasks
+
+def get_task(task_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM tasks WHERE id = ?', (task_id,))
+    tasks = cursor.fetchone()
+    connection.close()
+    return tasks
