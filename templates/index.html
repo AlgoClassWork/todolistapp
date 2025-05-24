@@ -3,7 +3,10 @@
 
 <ul>
 {% for task in tasks %}
-    <li>{{ task.title }} - {{task.description}}</li>
+    <li>{{ task.title }} - {{ task.description }}</li>
+    <form action="/del/{{task.id}}" method="POST">
+        <button> Удалить </button>
+    </form>
 {% endfor %}
 </ul>
 
@@ -13,3 +16,5 @@
     <input name="description" placeholder="Описание . . ."> <br>
     <button>Создать</button>
 </form>
+
+
