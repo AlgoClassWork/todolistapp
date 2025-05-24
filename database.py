@@ -40,3 +40,17 @@ def get_all_tasks():
     tasks = cursor.fetchall()
     connection.close()
     return tasks
+
+def task_done(id):
+    connection = sqlite3.connect('todo_list.db')
+    cursor = connection.cursor()
+    cursor.execute('SELECT done FROM tasks WHERE id = ?', (id,))
+    status = cursor.fetchone()[0]
+    cursor.execute('UPDATE tasks SET done = ? WHERE id = ?',
+    (0 if status else 1, id))
+    connection.commit()
+    connection.close()
+
+task_done(10)
+
+
