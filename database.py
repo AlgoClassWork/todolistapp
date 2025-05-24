@@ -26,6 +26,13 @@ def add_task(title, description=''):
     connection.commit()
     connection.close()
 
+def del_task(id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute('DELETE FROM tasks WHERE id = ?', (id,))
+    connection.commit()
+    connection.close()
+
 def get_all_tasks():
     connection = get_connection()
     cursor = connection.cursor()
