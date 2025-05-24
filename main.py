@@ -18,4 +18,8 @@ def add_task():
         database.add_task(title, description)
     return redirect('/')
 
+#http://127.0.0.1:5000/del/3
+
+
+database.init_database()
 app.run()
