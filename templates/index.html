@@ -4,14 +4,15 @@
 {% if tasks %}
     <ul>
     {% for task in tasks %}
-        <li>{{ task.title }} - {{ task.description }}</li>
-        <form action="/del/{{task.id}}" method="POST">
-            <button> Удалить </button>
+        <li>{{ task.title }} - {{task.description}}</li>
+        <form action="/delete/{{task.id}}" method="POST">
+            <button>Удалить</button>
         </form>
+        <a href="/edit/{{task.id}}">Изменить</a>
     {% endfor %}
     </ul>
 {% else %}
-    <p>Задач пока нету!</p>
+    <p>Задач пока нет</p>
 {% endif %}
 
 <h2>Добавить задачу:</h2>
@@ -20,6 +21,3 @@
     <input name="description" placeholder="Описание . . ."> <br>
     <button>Создать</button>
 </form>
-
-
-
