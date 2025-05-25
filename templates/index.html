@@ -11,6 +11,7 @@
             <a href="/done/{{task.id}}"> 
                 {% if task.done %} Выполнено {% else %} Не выполнено {% endif %}
             </a>
+            <a href="/edit/{{task.id}}"> Редактировать </a>
             <form action="/delete/{{task.id}}" method="POST">
                 <button>Удалить</button>
             </form>
