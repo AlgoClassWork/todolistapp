@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/static/style.css">
 <h1>ToDo List</h1>
 <h2>Мои задачи:</h2>
 
@@ -9,6 +10,9 @@
             <button>Удалить</button>
         </form>
         <a href="/edit/{{task.id}}">Изменить</a>
+        <a href="/done/{{task.id}}" class="{% if task.done %} done {% else %} undone {% endif %}" >
+            {% if task.done %} Выполнено {% else %} Не выполнено {% endif %}
+        </a>
     {% endfor %}
     </ul>
 {% else %}
