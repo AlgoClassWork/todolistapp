@@ -33,6 +33,14 @@ def delete_task(task_id):
     connection.commit()
     connection.close()
 
+def update_task(task_id, title, description, done):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(''' UPDATE tasks SET title =?, description =?, done=?
+                       WHERE id =?''', (title, description, done, task_id))
+    connection.commit()
+    connection.close()
+
 def task_done(task_id):
     task = get_task(task_id)
     connection = get_connection()
