@@ -4,10 +4,13 @@
 {% if tasks %}
     <ul>
     {% for task in tasks %}
-        <li>{{ task.title }} - {{task.description}}</li>
-        <form action="/delete/{{task.id}}" method="POST">
-            <button>Удалить</button>
-        </form>
+        <li>
+            {{ task.title }} - {{task.description}}
+            <a href="/done/{{task.id}}"> Выполнено </a>
+            <form action="/delete/{{task.id}}" method="POST">
+                <button>Удалить</button>
+            </form>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
