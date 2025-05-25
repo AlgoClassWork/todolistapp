@@ -1,1 +1,9 @@
 
+<h1>Редактировать задачу:</h1>
+
+<form action="/edit/{{task.id}}" method="POST">
+    <input name="title" value="{{task.title}}">
+    <input name="description" value="{{task.description}}">
+    <input name="done" type="checkbox">
+    <button>Сохранить</button>
+</form>
