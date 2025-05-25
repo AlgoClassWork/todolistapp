@@ -31,6 +31,17 @@ def edit_task(task_id):
         task = database.get_task(task_id)
         return render_template('edit.html', task=task)
     if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        done = 'done' in request.form
+        database.update_task(task_id, title, description, done)
         return redirect('/')
+    
+#http://127.0.0.1:5000/done/2
+@app.route('/done/<int:task_id>')
+def task_done(task_id):
+    database.task_done(task_id)
+    return redirect('/')
 
+database.init_database()
 app.run()
