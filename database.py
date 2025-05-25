@@ -56,3 +56,14 @@ def get_task(task_id):
     tasks = cursor.fetchone()
     connection.close()
     return tasks
+
+def task_done(task_id):
+    task = get_task(task_id)
+    if task:
+        status = task['done'] 
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute('UPDATE tasks SET done = ? WHERE id = ?',
+                       (0 if status else 1, task_id))
+        connection.commit()
+        connection.close()
