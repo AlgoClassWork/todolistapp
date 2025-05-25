@@ -33,6 +33,7 @@ def edit_task(task_id):
         title = request.form['title']
         description = request.form['description']
         done = 'done' in request.form
+        database.update_task(task_id, title, description, done)
         return redirect('/')
 
 #http://127.0.0.1:5000/done/3
