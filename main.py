@@ -23,5 +23,11 @@ def delete_task(task_id):
     database.delete_task(task_id)
     return redirect('/')
 
+#http://127.0.0.1:5000/done/3
+@app.route('/done/<int:task_id>')
+def task_done(task_id):
+    database.task_done(task_id)
+    return redirect('/')
+
 database.init_database()
 app.run()
