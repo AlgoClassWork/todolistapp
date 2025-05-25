@@ -26,10 +26,18 @@ def add_task(title, description=''):
     connection.commit()
     connection.close()
 
-def del_task(id):
+def delete_task(task_id):
     connection = get_connection()
     cursor = connection.cursor()
-    cursor.execute('DELETE FROM tasks WHERE id = ?', (id,))
+    cursor.execute('DELETE FROM tasks WHERE id = ?', (task_id,))
+    connection.commit()
+    connection.close()
+
+def update_task(task_id, title, description, done_status):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute('''UPDATE tasks SET title = ?, description = ?, done = ?
+                   WHERE id = ?''', (title, description, done_status, task_id))
     connection.commit()
     connection.close()
 
@@ -41,16 +49,10 @@ def get_all_tasks():
     connection.close()
     return tasks
 
-def task_done(id):
-    connection = sqlite3.connect('todo_list.db')
+def get_task(task_id):
+    connection = get_connection()
     cursor = connection.cursor()
-    cursor.execute('SELECT done FROM tasks WHERE id = ?', (id,))
-    status = cursor.fetchone()[0]
-    cursor.execute('UPDATE tasks SET done = ? WHERE id = ?',
-    (0 if status else 1, id))
-    connection.commit()
+    cursor.execute('SELECT * FROM tasks WHERE id = ?', (task_id,))
+    tasks = cursor.fetchone()
     connection.close()
-
-task_done(10)
-
-
+    return tasks
