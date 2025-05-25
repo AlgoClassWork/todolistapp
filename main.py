@@ -23,6 +23,18 @@ def delete_task(task_id):
     database.delete_task(task_id)
     return redirect('/')
 
+#http://127.0.0.1:5000/edit/4
+@app.route('/edit/<int:task_id>', methods=['GET', 'POST'])
+def edit_task(task_id):
+    if request.method == 'GET':
+        task = database.get_task(task_id)
+        return render_template('edit.html', task=task)
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        done = 'done' in request.form
+        return redirect('/')
+
 #http://127.0.0.1:5000/done/3
 @app.route('/done/<int:task_id>')
 def task_done(task_id):
