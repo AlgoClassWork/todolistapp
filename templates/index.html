@@ -1,10 +1,18 @@
+<link rel="stylesheet" href="/static/style.css">
+
 <h1>ToDo List</h1>
 <h2>Мои задачи:</h2>
 
 <ul>
 {% for task in tasks %}
-    <li>{{ task.title }} - {{task.description}}</li>
+    <li class="{% if task.done %} done {% else %} undone {% endif %}">{{ task.title }} - {{task.description}}</li>
     <a href="/edit/{{task.id}}">Изменить</a>
+    <form action="/delete/{{task.id}}" method="POST">
+        <button>Удалить</button>
+    </form>
+    <form action="/done/{{task.id}}" method="POST">
+        <button> {% if task.done %} Отменить {% else %} Выполнить {% endif %} </button>
+    </form>
 {% endfor %}
 </ul>
 

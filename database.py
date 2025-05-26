@@ -34,6 +34,22 @@ def update_task(task_id, title, description, done_status):
     connection.commit()
     connection.close()
 
+def delete_task(task_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute('DELETE FROM tasks WHERE id = ?', (task_id,))
+    connection.commit()
+    connection.close()
+
+def task_done(task_id):
+    task = get_task(task_id)
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute('UPDATE tasks SET done = ? WHERE id = ?', 
+                   (0 if task['done'] else 1, task_id))
+    connection.commit()
+    connection.close()
+
 def get_all_tasks():
     connection = get_connection()
     cursor = connection.cursor()
