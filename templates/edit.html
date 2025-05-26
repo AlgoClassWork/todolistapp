@@ -1,8 +1,7 @@
-<h1>Редактировать задачу:</h1>
+<h1>Редактировать задачу</h1>
 
 <form action="/edit/{{task.id}}" method="POST">
-    <input name="title" value="{{task.title}}">
-    <input name="description" value="{{task.description}}">
-    <input name="done" type="checkbox" {% if task.done %} checked {% endif %}>
-    <button>Сохранить</button>
+    <input name="title" value=" {{task.title}} "> <br>
+    <input name="description" value=" {{task.description}} "> <br>
+    <button>Сохранить изменения</button>
 </form>

@@ -1,26 +1,12 @@
-<link rel="stylesheet" href="/static/style.css">
-
 <h1>ToDo List</h1>
 <h2>Мои задачи:</h2>
 
-{% if tasks %}
-    <ul>
-    {% for task in tasks %}
-        <li class="{% if task.done %} done {% else %} undone {% endif %}">
-            {{ task.title }} - {{task.description}}
-            <a href="/done/{{task.id}}"> 
-                {% if task.done %} Выполнено {% else %} Не выполнено {% endif %}
-            </a>
-            <a href="/edit/{{task.id}}"> Редактировать </a>
-            <form action="/delete/{{task.id}}" method="POST">
-                <button>Удалить</button>
-            </form>
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Задач пока нет</p>
-{% endif %}
+<ul>
+{% for task in tasks %}
+    <li>{{ task.title }} - {{task.description}}</li>
+    <a href="/edit/{{task.id}}">Изменить</a>
+{% endfor %}
+</ul>
 
 <h2>Добавить задачу:</h2>
 <form action="/add" method="POST">
