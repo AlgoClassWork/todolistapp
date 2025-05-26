@@ -26,6 +26,8 @@ def edit_task(task_id):
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
+        database.update_task(task_id, title, description, 0)
+        return redirect('/')
     
 database.init_database()
 app.run()
